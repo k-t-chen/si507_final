@@ -9,3 +9,6 @@ This is the project for viewing the tickets. It runs on python v3.10 and is base
 
 ## Prerequisites
 You have to install python and **pip install requests** for getting response from url and **pip install mock** for unit test
+
+## How to run
+You can run on **main.py** for the ticket viewer program. Also you can run on **unit_test.py** to check the main code is correct or not.
