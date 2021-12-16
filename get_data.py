@@ -39,4 +39,16 @@ class Data:
             data = self.check_response(response)
         return data
 
+    def get_tree():
+        res = []
+        requester_id = []
+        f = open('tickets.json')
+        data = json.load(f)
+        for key in data["tickets"]:
+            sub = key['subject']
+            final = sub.split()
+            res.append(final[0])
+            requester_id.append(key["requester_id"])
+        return res, requester_id
 
+Data.get_tree()

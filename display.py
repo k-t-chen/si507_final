@@ -4,10 +4,13 @@ import sys
 # imports datetime to reformat the created data received from json
 from datetime import datetime
 from get_data import Data
+from tree import buildDict
+
 
 class Ticket():
     def __init__(self):
         self.getJson = Data()
+        self.tree = buildDict()
         self.tickets_count = self.getJson.get_data().get('count', 0)
         self.retry_flags = ["1", "y", "yes"]
         self.non_retry_flags = ["2", "n", "no"]
@@ -175,4 +178,42 @@ class Ticket():
                 print("\nBye! Have a good day!\n")
                 sys.exit()
 
+
+    def get_description(self):
+        name = input('Please Enter words to find the description and ticket id: ')
+        while not self.tree.search(name):
+            print("\nThere are no tickets descriptions from your typing")
+            print("Please try Again!")
+            self.monitor_cleaner()
+            name = input('Please Re-Enter the description to find your ticket: ')
+            continue
+        return self.tree.search(name)
+
+    def get_the_description(self):
+        while True:
+            ticket = self.get_description()
+            print(ticket)
+            self.monitor_cleaner()
+            ticket_id = input('Please enter the ticket_id: ')
+            # gets data of a single ticket with validated ticket id
+            target_data = self.getJson.get_one(ticket_id)
+            ticket = target_data.get("ticket", {}) # change default by your self
+
+            if ticket:
+                self.title_display()
+                self.show_ticket(ticket)  # displays the ticket
+            else:
+                print("\nThere is no such ticket. Please try again!")
+            
+            choice = self.get_ticket_retry()
+            if choice in self.retry_flags:
+                self.monitor_cleaner()
+                continue
+            elif choice in self.non_retry_flags:
+                print("Returning to Home Page.............")
+                self.monitor_cleaner()
+                break
+            elif choice in self.quit_flags:
+                print("\nBye! Have a good day!\n")
+                exit()
 

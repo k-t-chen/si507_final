@@ -8,6 +8,7 @@ class ZenDesk:
         self.quit_flags = ["q", "quit"]
         self.get_all_tickets_flags = ["1"]
         self.get_ticket_flags = ["2"]
+        self.get_description_flags = ["3"]
         self.retry_attemps = 3
 
     def main_menu(self):
@@ -17,7 +18,9 @@ class ZenDesk:
         print("Please select an option from below:\n")
         print("Press 1 to view all the tickets ")
         print("Press 2 to view a single ticket ")
+        print("Press 3 to search ticket description ")
         print("Quit (Enter q or Q or quit to Quit ) \n")
+        
     
     def monitor_cleaner(self):
         try:
@@ -74,6 +77,12 @@ class ZenDesk:
                 # calls get_ticket from tickets.py file to get a single ticket
                 self.auto_retry(self.monitor_cleaner)
                 self.auto_retry(self.Ticket.get_ticket())
+                continue
+
+            elif input_result in self.get_description_flags:
+                # calls get_ticket from tickets.py file to get a single ticket
+                self.auto_retry(self.monitor_cleaner)
+                self.auto_retry(self.Ticket.get_the_description())
                 continue
                 
             else:
