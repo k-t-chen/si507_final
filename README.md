@@ -3,8 +3,8 @@ This is the project for viewing the tickets. It runs on python v3.10 and is base
 **main.py** is the main program. It shows the main menu.  
 **display.py** is for the ticket interface.  
 **get_data.py** requests api and get the ticket data.   
-**unit_test.py** checks the main program works right and correctly.
-**tree.py** is the trie node that can build up the word tree
+**unit_test.py** checks the main program works right and correctly.  
+**tree.py** is the trie node that can build up the word tree.  
 **credentials.json** contains user's subdomain, email and password.   
 **tickets.json** is the provided json file.
 
